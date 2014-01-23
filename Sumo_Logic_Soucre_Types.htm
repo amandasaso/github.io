@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Sumo Logic Overview">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Sumo Logic Source Types</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Sumo_Logic_Soucre_Types.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Sumo Logic Source Types</h1>
+        <p>There are several different types of Sources that can be configured for Installed and Hosted Collectors. </p>
+        <h2>Installed Collector Sources</h2>
+        <p>Depending on the type of data you need to collect, you can choose from the following: </p>
+        <p><a href="Configuring_a_Local_File_Source.htm" style="font-weight: bold;">Local File Source</a><b>.</b> To collect log messages from the same machine where a Collector is installed, create a Local File Source.</p>
+        <p><a href="Configuring_a_Remote_File_Source.htm" style="font-weight: bold;">Remote File Source</a><b>.</b> Supported using SSH (Secure Shell), for remote file collections, you can install the Sumo Logic Collector on a network host that has network connectivity to all the remote hosts from which you wish to collect logs.   <![CDATA[ ]]></p>
+        <p><a href="Configuring_a_Syslog_Source.htm" style="font-weight: bold;">Syslog Source</a><b>.</b> Operates like a syslog server listening on the designated port to receive syslog messages. Set your syslog-enabled devices to send syslog data to the same port you specify in Sumo Logic Syslog Source configuration.</p>
+        <p><b><![CDATA[ ]]></b><a href="Configuring_a_Windows_Event_Log_Source.htm" style="font-weight: bold;">Local Windows Events Source</a><b>.</b> Collects local events you would normally see in the Windows Event Viewer. Setting up a Local Windows Event Source is a very quick process. There are no prerequisites for setting up the Source, and you'll begin collecting logs within a minute or so.</p>
+        <p><a href="Configuring_a_Remote_Windows_Event_Log_Source.htm" style="font-weight: bold;">Remote Windows Events Source</a><b>.</b> Collects the unique formats of Windows Events using the WMI (Windows Management Instrumentation) interface. Before collecting Windows Events from a remote machine, you'll need to configure a few settings.</p>
+        <p><a href="Configuring_a_Script_Source.htm" style="font-weight: bold;">Script Source</a><b>.</b> If you need to collect data that isn't stored in log files (like system performance metrics, database records, or perhaps data output from third-party monitoring solutions) you can use a Script Source that uses a script to fetch those custom sources of data. The script executes at defined intervals and then sends the data to Sumo Logic for analysis.</p>
+        <h2>Hosted Collector Sources</h2>
+        <p><a href="Configuring_an_Amazon_S3_Source.htm" style="font-weight: bold;">Amazon S3 Source</a><b>.</b> Data stored in your organization's S3 bucket can be uploaded into Sumo Logic, allowing you to perform the same searches and forensics on data no matter where it's stored.</p>
+        <p><a href="Configuring_an_HTTP_Source.htm" style="font-weight: bold;">HTTP Source</a><b>.</b> An endpoint for receiving a file (or a batch of files) uploaded via a unique URL generated for the Source. The URL securely encodes the Collector and Source information. You can add as many HTTP Sources as you'd like to a single Hosted Collector.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Sumo_Logic_Soucre_Types.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

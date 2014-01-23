@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About Dashboards</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#About_Dashboards.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>About Dashboards</h1>
+        <p><b>Dashboards</b> contain a collection of real-time <b>Monitors</b> that provide a graphical representation of your organization's data. The information you save in a Dashboard provides insight into the current state of the data you're uploading to Sumo Logic. Instead of having to run a number of queries, <span class="MyVariablesCompanyName">Sumo Logic</span> runs these searches automatically, making sure that you're never looking at stale data. You won't have to remember to run important searches once you save them to Dashboards--you'll be able to spend your time gaining insight into what's happening in your organization.</p>
+        <p>The uses for Dashboards are nearly endless. Perhaps your IT security group wants to keep an eye on who is installing virtual machines. Save the query you run as a Monitor, and watch for spikes in a line graph. Dashboards bring additional assurance, knowing that unusual activity will be displayed real-time  in an easy-to-digest graphical format. The data that matters the most to you is even easier to track.</p>
+        <p>You can configure each Dashboard to display information for different operational responsibilities in your organization. So in one Dashboard you can keep an eye on 404 errors or other website issues, while another Dashboard focuses on security policies. Or, for example, you can keep an eye on a particular server so you're aware of the condition of your machine:</p>
+        <p>
+            <img src="Resources/Images/Dashboards_perforamce_board_433x152.png" style="width: 433;height: 152;" />
+        </p>
+        <p>Perhaps you handle financial information in addition to IT data. You could create a Dashboard focusing on what's happening in your business:</p>
+        <p>
+            <img src="Resources/Images/Dashboards_stock_429x256.png" style="width: 429;height: 256;" />
+        </p>
+        <p>&#160;</p>
+        <h3>What else do I need to know before I&#160;get started?</h3>
+        <p>Here are a few things to keep in mind about Dashboards.</p>
+        <h4>Dashboards  can be published to leverage the data you've analyzed.</h4>
+        <p>You've saved Monitors to a Dashboard, and you'd like to enlighten others in your organization. Just publish the Dashboard to allow everyone to see what you've uncovered through your analysis.</p>
+        <h4>Dashboards are built to your specifications.</h4>
+        <p>As long as you run a search with aggregate results, you can save that search in a Dashboard as a Monitor. For example, you could create a Dashboard filled with performance-based searches, and another to track session length or other unique searches. Whatever makes sense for you and your organization--create a Dashboard and you're set.</p>
+        <p>You can also choose the number of columns in a Dashboard, allowing you to view data in the most compelling format for your needs.</p>
+        <p><a href="Saving_Dashboards.htm">Learn more about setting up&#160;Dashboards</a>
+        </p>
+        <h4>Dashboards may take some time to fill.</h4>
+        <p>Depending on the time range of a Monitor, it can take time for a Monitor to display the complete results. Monitors are built as data is ingested. So if you create a one-hour monitor, it'll take an hour to see the full results; for a 30-day Monitor, it will take 30 days. </p>
+        <h4>Dashboards require queries that have aggregate results.</h4>
+        <p>Only searches that produce aggregate results can be saved as Monitors. What does that mean? Basically, to produce aggregate results, your query will contain a <a href="Group-By_Functions.htm">grouping</a> function. This allows the data to be displayed properly in a graphical format.</p>
+        <h4>Dashboards can't support all queries.</h4>
+        <p>Certain operators cannot be used in Dashboard Monitors. A list of unsupported operators can be found in <a href="Adding_Monitors.htm">Adding Monitors</a>.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#About_Dashboards.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

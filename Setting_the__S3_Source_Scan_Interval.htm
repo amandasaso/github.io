@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Setting Up|Hosted Collectors and  Sources|Adding an Amazon S3 Source">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About setting the S3 Scan Interval</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Setting_the__S3_Source_Scan_Interval.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>About setting the S3 Scan Interval</h1>
+        <p>When configuring an S3 <span class="MyVariablesSource">Source</span>, you'll set the <b>Scan Interval</b>, which defines the waiting time between scans of the objects in your S3 bucket. </p>
+        <p>When setting the S3 Source's Scan Interval it's important to be aware that setting a value that's too low could cause additional charges to your AWS account. When <span class="MyVariablesCompanyName">Sumo Logic</span> scans the contents of a bucket for new files, it will perform a number of listings, which may increase the number of objects in the bucket.  <span class="MyVariablesCompanyName">Sumo Logic</span> can't determine if the data in your S3 bucket has changed without listing each object, every Scan Interval. </p>
+        <p>In addition, be aware that uploading data to <span class="MyVariablesCompanyName">Sumo Logic</span> can incur data transfer charges from AWS as well. For your information, you can view current pricing for list and data transferring <a href="http://aws.amazon.com/s3#pricing">here</a>. To get an idea of what your charges could be, we recommend using the <a href="http://calculator.s3.amazonaws.com/calc5.html">Simple Monthly Calculator</a>.</p>
+        <p>Another factor to consider is how quickly you'd like log data to appear in <span class="MyVariablesCompanyName">Sumo Logic</span>. If the data isn't time-sensitive, you can choose a longer Scan Interval; if you'd like the data to be collected more quickly set a shorter Scan Interval.</p>
+        <p>To balance these considerations, it is recommended to use the default Scan Interval setting of five minutes. If you're concerned that your organization's bucket is of a size that would make this interval too costly, set a longer Scan Interval.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Setting_the__S3_Source_Scan_Interval.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

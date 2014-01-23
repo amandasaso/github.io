@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Search|Parsing">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Parsing multiple values in a field</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Parsing_Multiple_Fields.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Parsing multiple values in a field</h1>
+        <p>In addition to parsing a field, the <b>multi</b> option allows you to parse multiple values <i>within</i> a single field. This means that Multi keyword instructs the parse regex operator to not just look for the first value in a field but for all of the values, even in messages with a varying number of values in a field. As a part of this process, the multi keyword creates copies of each message so that each individual value in a field can be counted.</p>
+        <p>For example, say our firewall log messages look like this:</p>
+        <p class="Indent">http://www.bigdata.biz" "CU1_4919|967:925:123</p>
+        <p>From this message, we'd like to extract the firewall codes. We'll use the <b>multi</b> keyword in our parse regex:</p>
+        <p class="Indent" style="font-weight: bold;">... parse url first<br />| parse regex "Firewall Rules: \|(?&lt;trigger_rules&gt;.*?)\|"<br />| parse regex field=trigger_rules "(?&lt;trigger_rule&gt;\d+)" multi<br /></p>
+        <p>The output would look like: </p>
+        <p>
+            <img src="Resources/Images/Multi_parse_example.png" />
+        </p>
+        <p>With each value having its own message, we could use any of the parsed values in an aggregation.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Parsing_Multiple_Fields.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

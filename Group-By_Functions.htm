@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Group-By Functions</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Group-By_Functions.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Group-By Functions</h1>
+        <p>Aggregating (group-by) functions are used in conjunction with the group operator and a field name. Aggregating functions always create a field named with a combination of an underscore (_) and the function name, such as _count, _count_distinct, _sum, _max, _stddev. </p>
+        <p>When using any grouping function, the word <b>by</b> is sufficient for representing the group operator. The typical construction when using group-by functions is</p>
+        <blockquote>
+            <p><b>grouping_function by (fieldname)</b>
+            </p>
+        </blockquote>
+        <p>Aggregating (group-by) functions include:</p>
+        <ul>
+            <li value="1"><a href="count_and_count_distinct.htm">count</a>
+            </li>
+            <li value="2"><a href="count_and_count_distinct.htm">count_distinct</a>
+            </li>
+            <li value="3"><a href="sum.htm">sum</a>
+            </li>
+            <li value="4"><a href="avg.htm">avg</a>
+            </li>
+            <li value="5"><a href="standard_deviation.htm">stddev</a>
+            </li>
+            <li value="6"><a href="first_and_last.htm">first</a>
+            </li>
+            <li value="7"><a href="first_and_last.htm">last</a>
+            </li>
+            <li value="8"><a href="min_and_max.htm">min</a>
+            </li>
+            <li value="9"><a href="min_and_max.htm">max</a>
+            </li>
+        </ul>
+        <p class="Tip">By default, the ordering  is not defined inside of groups created using a group-by expression. To order your results, use <a href="Sort.htm">the <b>sort</b> operator</a>.</p>
+        <h3><a name="max"></a>
+        </h3>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Group-By_Functions.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

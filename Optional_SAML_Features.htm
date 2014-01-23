@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Beta Features|Provisioning SAML">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Optional SAML features</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Optional_SAML_Features.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Optional SAML features</h1>
+        <p>When configuring SAML, there are two optional features that you can use to set up how new user accounts are added, and where users are directed after logging out of <span class="MyVariablesCompanyName">Sumo Logic</span>.</p>
+        <h2>Setting up On Demand provisioning</h2>
+        <p>In most cases, setting up On-Demand provisioning makes adding new users very simple: the first time a user signs in to <span class="MyVariablesCompanyName">Sumo Logic</span>, an account is automatically created. </p>
+        <p><b>Prerequisites:</b>
+        </p>
+        <p><b>Specify </b><span style="font-weight: bold;" class="MyVariablesCompanyName">Sumo Logic</span><b> roles.</b> In order for new accounts to be created, you'll need to specify <span class="MyVariablesCompanyName">Sumo Logic</span> RBAC roles in the <a href="setting_up_SAML.htm">SAML&#160;Configuration dialog box</a>.</p>
+        <p><b>SAML Attributes.</b>You'll need the First Name and Last Name attributes your IdP uses to identify users.</p>
+        <p>When the account is created, <span class="MyVariablesCompanyName">Sumo Logic</span> credentials are emailed to the user. (Users need both <span class="MyVariablesCompanyName">Sumo Logic</span> credentials and SAML permissions.) </p>
+        <p>
+            <img src="Resources/Images/SAML_OnDemand_Provisioning.png" />
+        </p>
+        <h2>Adding a Logout Page</h2>
+        <p>Adding a <b>Logout Page</b> sets a specific URL where users in your organization are sent after logging out of <span class="MyVariablesCompanyName">Sumo Logic</span>. You could choose your company's intranet, for example, or any other site that you'd prefer users in your organization access.</p>
+        <p>To add a log out page, type the URL in the dialog box:</p>
+        <p>
+            <img src="Resources/Images/SAML_LogoutPage.png" />
+        </p>
+        <h2>Using roles set up via your IdP</h2>
+        <p>When enabled, the <b> Roles Attribute</b> option assigns roles to a new user the first time the user logs in. These roles are configured via your IdP. Because the assertions are provided to Sumo Logic by your IdP, the role names you enter in the Roles Attribute text box much exactly match those names in the IdP.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Optional_SAML_Features.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

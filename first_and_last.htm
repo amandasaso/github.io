@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Operators &amp; Expressions|Group Operator &amp; Grouping Functions">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>first and last</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#first_and_last.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>first and last</h1>
+        <p>In general terms, <b>first</b> finds the earliest occurrence in search results, and <b>last</b> finds the result that follows all others, based on the sort order for the query</p>
+        <h2>first </h2>
+        <p>The default sort order for returned messages is reverse chronological—most recent descending to oldest. So <b>first</b> finds the most recent value of the field being evaluated within the time range. However, if you have specified a sort order other than descending chronological, then <b>first</b> finds the message that precedes all others based on the sort order defined in your query.</p>
+        <p>If there is no sort order specified for returned results (for example, when using <b>limit 20), </b>then<b> first </b>simply returns the first result encountered without respect to date or list order.</p>
+        <ul>
+            <li value="1">Syntax: <b>first(fieldname)</b></li>
+            <li value="2">Creates field named <b>_first</b></li>
+            <li value="3">Example: <b>... | first(error_message) group by hostname</b></li>
+        </ul>
+        <h2><a name="last"></a>last</h2>
+        <p>Finds the last value of the field being evaluated within the time range and according to the specified sort order. Remember that the default order for returned messages is reverse chronological—most recent descending to oldest. Therefore, <b>last</b> is the oldest result in the returned list.  If you have specified an order other than reverse chronological, then <b>last</b> finds the ending message that follows all others based on your sort order.</p>
+        <ul>
+            <li value="1">Syntax: <b>last(fieldname)</b></li>
+            <li value="2">Creates field named <b>_last</b></li>
+            <li value="3">Example: <b>... | last(status_code) group by hostname</b></li>
+        </ul>
+        <p class="codeIndent">Sample log message:</p>
+        <p class="IndentCode">Aug 2 04:06:08 : host=10.1.1.124: local/ssl2 notice mcpd[3772]: filesize=20454: diskutilization=0.4 : 01070638:5: Pool member 172.31.51.22:0 monitor status down.</p>
+        <p>Example based on sample log message above: <br /><br /><b>disk* | parse "diskutilization=*" as disk | disk&gt;0.8?1:0 as overcapacity | last(overcapacity) by _sourceHost | sort by _last</b><br /><br />Finds all messages that contain the term <b>disk*</b> and parses out all that have a <b>diskutilization=</b> value. It then extracts the value of diskutilization into field <b>disk</b>. It then determines if that value is greater than 80% and will find the last occurrence of that value per host effectively producing a list of hosts that have disk utilization that is over 80%.</p>
+        <h2>Using first and last operators in Monitors</h2>
+        <p>Data isn’t always ingested in perfect order, meaning that log messages may arrive out of sequence. In one-off queries that use the first operator or last operator nonsequential logs aren’t an issue. However, to save a query as a Monitor, because the query is run continuously, logs need to be in perfectly sequenced to produce results. To make sure that they are in perfect order, you’ll need to explicitly tag fields with the withtime operator.</p>
+        <p>Using withtime forces log messages to be put in perfect order, which then allows you to add queries that contain the first or last operator. It created a field named <b>xxx_withtime</b> that will appear as part of your search results. <b>Note:</b> The withtime operator is not considered a stand-alone operator; it’s only used with the first and last operators to enable those operators to be used in Monitors.</p>
+        <p><b>Syntax:</b> * | parse ... as status | withtime status | most_recent(status_withtime) by _sourcehost</p>
+        <p style="font-weight: bold;">Examples:</p>
+        <p style="font-weight: bold;">Find the most recent visitors to our site by IP. <span style="font-weight: normal;">Say we’d like to keep an eye on visitors that hit our site from different countries. Running a query like:</span></p>
+        <p style="font-weight: bold;">*ip* OR *address*<br />| parse regex "(?&lt;IP&gt;\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})" <br />| lookup latitude, longitude, country_code from geo://default on ip=IP <br />| where !isNull(country_code) <br />| withtime IP <br />| most_recent(ip_withtime) by country_code</p>
+        <p>produces results like:</p>
+        <p>
+            <img src="Resources/Images/mostRecent_IPs_216x528.png" style="width: 216;height: 528;" />
+        </p>
+        <p><b>Find the most recent user logged in by account.</b> If you’d like to find the user who most recently logged in (per account or organization, which we’ve used in our example) you can use a first operator, in a query that looks something like:</p>
+        <p style="font-weight: bold;">...| parse "Successful login for user '*', organization: '*'" as user,org_id | withtime user | first(user_withtime) by org_id</p>
+        <p>This query would return a list of organizations and a list of the user ID that most recetly logged in. You could save the query as a Monitor to keep a constant eye on logins.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#first_and_last.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

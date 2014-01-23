@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Setting Up|Before you begin">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Where should I set up Installed Collectors?</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Deciding_Where_to_Install.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Where should I set up Installed Collectors?</h1>
+        <p>When you are deciding where to install Collectors, you have a large number of options to choose from. When you are thinking about your log collections, consider your network topology, your available bandwidth, and your domains or user groups. </p>
+        <p>&#160;</p>
+        <p class="Important">Unlike Installed Collectors, Hosted <span class="MyVariablesCollectors">Collectors</span> don't require installation or activation. Nor do Hosted <span class="MyVariablesCollectors">Collectors</span> have physical requirements since <span class="MyVariablesCompanyName">Sumo Logic</span> hosts them in AWS. For more information, see <a href="Setting_up_a_Hosted_Collector.htm">Setting up a Hosted Collector</a>.</p>
+        <h2>
+            <br />Single Installed Collector configuration</h2>
+        <p> A Sumo Logic Installed Collector can be installed on any standard server that you use for log aggregation or other network services. For example, you might decide to centralize all your collections with just one Collector installed on a dedicated machine, especially if all of your data can be accessed from a single network location. Each Installed Collector can manage about 500 files combined at a rate no greater than 15,000 events per second. </p>
+        <p>
+            <img src="Resources/Images/Single_Collector.png" />
+        </p>
+        <p>&#160;</p>
+        <h2>
+            <br />Multiple Installed Collector configuration<br /></h2>
+        <p>Have a distributed network topology? You can install multiple Collectors on many machines and set up any combination  Sources to collect from your infrastructure. </p>
+        <p>
+            <img src="Resources/Images/multiple_collectors.png" />
+            <br />
+            <br />
+        </p>
+        <h2>Cloud or data center deployment</h2>
+        <p>Installed Collectors can also be deployed across a cloud or data center configuration—Collectors on each machine report into Sumo Logic independently sending distinct log data so that you can query against any virtual machine or server in your deployment.</p>
+        <p>&#160;</p>
+        <h2>
+            <br />Configuring     <![CDATA[ ]]><span class="MyVariablesSource">Source</span>s</h2>
+        <p>After installing a Collector, the next step is to configure Sources. A Source gathers and sends logs to the Sumo Logic Cloud. You can set up as many Sources as you need for a given Collector. A Source should be configured to collect similar data types. For example, you might set up three Local File Sources to collect router activity logs from three locations, and another Local Source to collect logs from a web application. </p>
+        <p>Each Source is <a href="Adding_Metadata_to_Sources.htm">tagged with its own metadata</a>. The more Sources you set up, the easier it is to isolate one of the Sources in a search since each Source can be identified by its metadata. </p>
+        <p>
+            <img src="Resources/Images/Source_Types.png" />
+        </p>
+        <h3>Collecting Local Files</h3>
+        <p>For many types of collections, such as collecting output files from an application or web server, installing a Sumo Logic Collector on the same machine where the files reside is the best solution. However, for any file that can be collected locally, a remote option is always available.</p>
+        <h3>Collecting Remote Files</h3>
+        <p><a href="Configuring_a_Remote_File_Source.htm">Remote File</a> Sources are supported using SSH (Secure Shell). For remote file collections, you will need to install the Sumo Logic Collector on a network host that has network connectivity to all the remote hosts from which you wish to collect logs. Configure the Collector with a set of valid credentials (user and password or SSH key) for those remote hosts. </p>
+        <p>Since the volume of data transferred may be large, we recommend installing the Collector on a host that is on the same network segment as the applications and devices you are collecting from.</p>
+        <h3>Collecting from Syslog Sources</h3>
+        <p>A Sumo Logic <a href="Configuring_a_Syslog_Source.htm">Syslog Source</a> operates like a syslog server listening on a designated port to receive syslog messages.You can install the Sumo Logic Collector on the same system where your devices are currently pointing and where your current syslog server is running.  Configure a Syslog Source on that Collector to listen on the same port using the same protocol as your existing syslog server. Then turn off your syslog server.  All devices that were sending to your syslog server will now send data to your Sumo Logic Collector. Sumo Logic Collectors accept syslog messages over UDP or TCP. </p>
+        <p> Alternatively, you can collect files from a syslog server currently in operation. You can install a local Collector on the same machine as the existing syslog server, then set up the syslog server to output a local file. You can then collect the consolidated log file  using a Local File Source.</p>
+        <h3>Collecting Windows Events</h3>
+        <p>Sumo Logic offers both <a href="Configuring_a_Windows_Event_Log_Source.htm">Local Windows Events</a> and <a href="Configuring_a_Remote_Windows_Event_Log_Source.htm">Remote Windows Events</a> Sources to collect the events listed in the Windows Events Viewer. Local Windows logs can be collected using a Local File Source. Logs can also be collected remotely using a CIFS/SMB path. For these collections, a Local File Source is configured to collect remote files from a UNC Share Path. Windows Events Sources can collect from the local machine, or from a remote machine within the same Domain.</p>
+        <h3>Collecting from a Script</h3>
+        <p><a href="Configuring_a_Script_Source.htm">Script Source</a> collection is the most recent addition to Sumo Logic. A Script Source isn't limited to collecting log data. If, for example, you want to poll a database, you can write a script that sends these unconventional data types to the <span class="MyVariablesCompanyName">Sumo Logic</span> cloud.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Deciding_Where_to_Install.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

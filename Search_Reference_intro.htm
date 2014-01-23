@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Operators &amp; Expressions">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Search Syntax Overview</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Search_Reference_intro.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Search Syntax Overview</h1>
+        <p>The Sumo Logic Search Language operates on your entire log repository, no matter how many different log sources you have—in real time. The search query language is intuitive and efficient, allowing you to search terabytes of data and see results in seconds.</p>
+        <h2>Query Syntax</h2>
+        <p>The basis of Sumo Logic Search is a funnel or "pipeline" concept: beginning from all of your current Sumo Logic data, you enter keywords and operators separated by pipes ("|"). Each operator acts on the results from the previous operator to further process your results. Results are returned incrementally with the most recent messages displaying  first. Additional messages are added progressively to the Messages tab as the search walks backward in time through all of your log data. </p>
+        <p>The syntax for a typical search query looks something like this:</p>
+        <p class="Indent"><b>keyword expression | operator 1 | operator 2 | operator 3</b>
+        </p>
+        <p><b>Keyword Expression</b>: For simplicity, we refer to the first term in a search query as a "keyword" expression. In fact, this portion of the query is a very powerful full-text, Boolean search expression. The keyword expression also encompasses metadata searches for fields such as _sourceCategory, _sourceHost. For more on full-text search in queries, see <a href="Full-Text_Search.htm">Keyword Search Expressions.</a></p>
+        <p><b>Operators</b>: After filtering with an initial full-text search, the operators that follow can extract strings, parse known message components into fields, refine results using conditional expressions, and then group, count, or sort results. In addition, the <b>summarize</b> operator can be used to reveal patterns in a  set of logs by automatically grouping messages with similar structures and common repeated text strings into clusters.</p>
+        <h2><a name="Pipe"></a>Pipe "|" Delimiter</h2>
+        <p>The pipe delimiter is used to separate the keyword expression and each subsequent operator. Each pipe-delimited operator further processes search results from the preceding operator. You can string some operators in a series within a single pipe (like <b>parse</b> and <b>where)</b>, but if you are not sure of the syntax, always add the pipe.</p>
+        <p>Syntax:</p>
+        <ul>
+            <li value="1">Follow keyword search expression with a pipe "|"</li>
+            <li value="2">Precede each operator with a pipe "|" </li>
+        </ul>
+        <p>Example:</p>
+        <p class="Indent">
+            <img src="Resources/Images/query_syntax.jpg" />
+        </p>
+        <h2>User-Created Fields</h2>
+        <p>You can parse or extract values and assign a user-created (aliased) field name to the result. The field is valid only for the current search, and does not carry over to new searches. When creating aliased fields, there are a few rules that apply:</p>
+        <ul>
+            <li value="1">Field names can contain alphanumeric characters, hyphens, and underscores, but should always start and end with an alphanumeric character. Sumo Logic fields always begin with an underscore, such as _sourceCategory, _sourceHost, or _count_distinct. Here are two examples of queries that generate a user-created field called src_IP:<ul><li value="1">*| parse regex "(?&lt;src_ip&gt;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"</li><li value="2">_sourceCategory=apache | parse "* " as src_IP </li></ul></li>
+            <li value="2">Multiple fields can be extracted and named within a single query. For example, the query below creates fields "type" and "user":<ul><li value="1">_sourcehost=vpn3000 | parse "Group [*] User [*]" as (type, user) | count type | sort by _count</li></ul></li>
+            <li value="3">Aggregating functions also automatically generate a field. Using the count operator creates a field called _count. The sum operator creates a field called _sum. The max operator creates a field called _max, and so forth.</li>
+            <li value="4">User-created fields should not be named with reserved words such as the names of Sumo Logic operators like group, count, or sum.</li>
+        </ul>
+        <p>For information on parsing fields, see <a href="Parsing_and_Naming_a_Field.htm">Extracting and Naming a Field</a></p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Search_Reference_intro.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

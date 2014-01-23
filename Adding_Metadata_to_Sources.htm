@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Administration|Managing Sources">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Establishing Metadata Conventions</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Adding_Metadata_to_Sources.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Establishing Metadata Conventions</h1>
+        <p>Prior to installing Collectors, it is a good idea to establish predefined naming conventions for Sources, Collectors, and especially metadata tags. Sumo Logic Search supports the use of metadata tags in your messages such as Source Host and Source Category. This metadata is attached to your log messages at collection-time. All metadata is determined by the values you enter when configuring a Source.   These tags are very important since they provide valuable keywords and terms you can use to find targeted results in search queries. </p>
+        <p>Suggestions for the following logical taxonomies are explained in the next sections:</p>
+        <ul>
+            <li value="1"><b>Collector.</b><b><![CDATA[ ]]></b>The name of the Collector entered at activation time.</li>
+            <li value="2"><b>Source.</b> The name of the Source entered when the Source is created.</li>
+            <li value="3"><b>Source Category. </b>This is a completely open tag determined by your entry to the "Category" field when you configure a Source. The tags you enter can help you to search by data type, machine type, function, location, or any category you choose without the need to specify which Collector or Source the messages belong to. </li>
+            <li value="4"><b>Source Host.</b> For Remote and Syslog Sources, this is a fixed value determined by the hostname you enter in the "Hostname" field (your actual system values for hosts). For a Local File Source, you can overwrite the host system value with a new value of your choice.</li>
+            <li value="5"><b>Source Name.   <![CDATA[ ]]></b>A fixed value determined by the path you enter in the "File" field when configuring a Source. This metadata tag cannot be changed.</li>
+        </ul>
+        <h2>Source Categories</h2>
+        <p>Category metadata is a completely open metadata tag. The Source Category metadata is stored in a Sumo Logic  field called <b>_sourceCategory</b>. This field is created when you enter text into the Source Category field at Source configuration time. If you prefer to set the tags higher up in the logical hierarchy, you can alternatively enter text in the Collector configuration for all Sources belonging to a Collector. For example, if you have three Syslog Sources feeding into one Collector, you might want to set a list of tags at the Collector level rather than tagging each Source separately. Note that the more specific Source-level tags override the more general Collector level tags. </p>
+        <p>Log categories can be somewhat complex, as many log files may belong to more than one logical category. For example, you may collect Apache logs for several reasons, including performance monitoring, security, and for audit compliance. Some of the major categories Sumo Logic recommends include:</p>
+        <ul>
+            <li value="1">OS (for Operating System level logs)</li>
+            <li value="2">Security (for security related logs)</li>
+            <li value="3">Application (for application logs)</li>
+            <li value="4">Audit (logs for audit compliance)</li>
+            <li value="5">Performance (performance related logs)</li>
+            <li value="6">Debug (for application development debugging)</li>
+            <li value="7">Health (for system health logs)</li>
+        </ul>
+        <p>In many  cases, it may be difficult to foresee all the searches, reports and use cases you will eventually have for these log files. As such, Sumo Logic recommends chaining these metadata tags  using underscores, and following a General-to-Specific order, like this:</p>
+        <ul>
+            <li value="1">OS_Security</li>
+            <li value="2">OS_Audit</li>
+            <li value="3">OS_Application_Mail</li>
+            <li value="4">Security_Firewall_ASA</li>
+            <li value="5">Security_IDS_Snort</li>
+            <li value="6">Application_Apache_Performance</li>
+            <li value="7">Audit_SAS70</li>
+            <li value="8">Audit_Sorbox</li>
+            <li value="9">Debug_CustomApplication_Foo</li>
+        </ul>
+        <p>The implied distinction between, for instance, OS_Application_Mail and say, Application_Mail would be for cases where you may simply be running the MTA (Mail Transfer Agent) that came with your flavor of Linux by default in order to send system notifications from cron jobs (OS_Application_Mail), versus, you are running an MTA as a service to provide email capabilities to your organization or customers (Application_Mail).</p>
+        <p>This allows you to do searches such as:</p>
+        <ul>
+            <li value="1">_sourceCategory=OS*</li>
+            <li value="2">_sourceCategory=*Audit</li>
+            <li value="3">_sourceCategory=*Application*</li>
+        </ul>
+        <h2>Source Host</h2>
+        <p>Hostname metadata  is stored in a Sumo Logic field called <b>_sourceHost</b>. For the hostname, Sumo Logic retrieves and uses the host’s actual OS-level hostname. For Local Sources, you can enter a different value in this field if you choose. If you choose to overwrite the system hostname, Sumo Logic recommends that you carefully select a meaningful name that uniquely identifies the host from which data is collected. </p>
+        <p>Remote collections present a special circumstance for Source Host metadata since one Remote Source can be configured to collect the same file from multiple hosts. In this case, Sumo Logic will tag each message with just one hostname (the host from which the message originated).</p>
+        <p>If you choose to overwrite the system names with custom metadata, the recommended best practice is to organize your hostnames in an easy to follow hierarchy such as:</p>
+        <ul>
+            <li value="1"><b>Location_Purpose_UID</b>
+            </li>
+            <li value="2">SF_MySQL_Primary</li>
+            <li value="3">Boston_FW_Secondary</li>
+            <li value="4">USEast_Hadoop_37</li>
+        </ul>
+        <p>You will then be able to use wildcards to refine a search by any one of the chained terms in the Source Host metadata. For example:</p>
+        <ul>
+            <li value="1">_sourceHost=*USEast*</li>
+            <li value="2">_sourceHost=*MySQL*</li>
+            <li value="3">_sourceHost=*FW*</li>
+        </ul>
+        <h2>Source Name</h2>
+        <p>The metadata field called Source Name  (<b>_sourceName</b>) contains the file path entered when you created your Source.  If your Source points to more than one file path, then messages from each file path are tagged with the specific path from which they were collected.</p>
+        <h2>Best Practice</h2>
+        <p>When entering Source Metadata, it is strongly recommended that you use underscores to string together your metadata tags without using any space characters. Though spaces and special characters are allowed in the metadata fields, if you use spaces:</p>
+        <ul>
+            <li value="1">You will need to quote the metadata exactly as you entered it at Source configuration time to find results.</li>
+            <li value="2">You will not be allowed to use wildcards since wildcards cannot be used with quotes.</li>
+        </ul>
+        <p>If you use underscores instead of spaces, you will be able to use wildcards in your searches to match a partial tag for the metadata field. So, for example, we recommend you enter metadata into the Source Category field like this:</p>
+        <p class="code">western_region_firewall_appliances_cisco</p>
+        <p>You can then search using wildcards by typing something like <b>_sourceCategory=*firewall*</b> in the query. Note that metadata tags can be changed later, but the changes are not retroactive. The new tags will only be applied going forward and cannot be changed for data that is already in the Sumo Logic Cloud.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Adding_Metadata_to_Sources.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>
