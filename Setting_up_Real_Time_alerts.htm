@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Content Library|Scheduling Searches">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Setting up Real Time Alerts</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Setting_up_Real_Time_alerts.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Setting up Real Time Alerts</h1>
+        <p class="Important" style="font-weight: bold;">This feature is only available to customers with Enterprise accounts, or those in paid trials. If you'd like to try using Real Time Alerts, please contact your sales representative.</p>
+        <p>Real Time Alerts are scheduled searches that run nearly continuously. That means that you're informed in real-time when error conditions exist.</p>
+        <p>When an alert condition is satisfied, Sumo Logic sends an e-mail (or trigger a script action). Further e-mails are not sent while the condition remain satisfied. Instead,  if the number of matches goes below the threshold, and then exceeds the threshold a second time we send a second alert.</p>
+        <p>Note that some queries cannot be used in Real Time Alert searches. Operators not supported for Real Time Alerts, including countFrequent, details, save, sessionize, summarize, and trace.</p>
+        <p>&#160;</p>
+        <p class="Note">If the time zone of messages is set incorrectly, those logs won't be picked up by Real Time Alerts</p>
+        <p style="font-weight: bold;">To set up Real Time alerting:</p>
+        <ol>
+            <li value="1">Do one of the following:</li>
+        </ol>
+        <ul>
+            <li value="1">Open a saved search and convert it to a scheduled search. Click the <b>Open</b> link below the Search query field. Select the search you want to schedule, and then click <b>Edit</b>.</li>
+            <li value="2">Use your current search query and then set up a schedule for it to periodically run and send alerts by email.</li>
+        </ul>
+        <ol start="2">
+            <li value="2">Choose <b>Real Time</b> from the <b>Run Frequency</b> menu.</li>
+            <li value="3">Choose an option from the Timerange menu.</li>
+        </ol>
+        <ol start="4">
+            <li value="4">For <b>Alert Condition</b>,choose one of the following:</li>
+        </ol>
+        <ul>
+            <li value="1"><b>Notify me every time upon search completion</b> if you want an email with search results every time the search is run (depending on the frequency, you could get an email every 15 minutes, every hour, or once a day). </li>
+            <li value="2"><b>Notify me only if the condition below is satisfied</b> if you'd like to set up a scheduled search that alerts you to specific events, and then set any of the following conditions before typing a value in the text box:</li>
+        </ul>
+        <p class="Indent"><b>Number of Results</b><b>.</b> Depending on the search, set a condition to receive an email by the number of results. If your saved search returns log messages, then the alert will use the number messages you specify; if your query produces aggregate results, the alert will use the number of aggregates (or groups).</p>
+        <p class="Indent"><b>Equal to. </b>Choose if there is an exact number of records in a search result at which you want to be notified.</p>
+        <p class="Indent"><b>Greater than. </b>Choose if you want to be notified only if the search results include greater than that number of messages or groups you set in the text box.<br /></p>
+        <ol start="7">
+            <li value="5">For Alert Type, choose <b>Email</b> to receive email alerts.</li>
+            <li value="6">For<b> Recipients</b>, enter email addresses for the recipient of the alert results. You can edit the recipient at any time.</li>
+            <li value="7">Click <b>Save</b>. <br />An email notification will be sent to the recipient email address(es) based on the notification parameters. For queries returning high numbers of messages or group results, the email notification contains a representative sample of the first 20 messages or groups.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Setting_up_Real_Time_alerts.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

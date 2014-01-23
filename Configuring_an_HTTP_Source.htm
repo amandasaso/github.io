@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Setting Up|Hosted Collectors and  Sources">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Configuring an HTTP&#160;Source</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Configuring_an_HTTP_Source.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Configuring an HTTP&#160;Source</h1>
+        <p>An HTTP Source is an endpoint for receiving a file (or a batch of files) uploaded via a unique URL generated for the <span class="MyVariablesSource">Source</span>. The URL securely encodes the <span class="MyVariablesCollector">Collector</span> and Source information. You can add as many HTTP&#160;Sources as you'd like to a single Hosted Collector.</p>
+        <p>With an HTTP&#160;Source you can upload logs from data sources where you cannot install a Local Collector. For example, you can export data from a platform as a service (PaaS) or infrastructure as a service (IaaS) provider, allowing you to gain visibility from, say your billing system service provider, leveraging the same <span class="MyVariablesCompanyName">Sumo Logic</span> tools your organization already uses. Please check with your IaaS or PaaS providers for information regarding using their APIs to forward log data into Sumo Logic's HTTP endpoint.</p>
+        <p>The generated URL&#160;is a long string of letters and numbers.You can generate a new URL at any time. For more information see <a href="Generating_a_new_URL.htm">Generating a new URL</a>.</p>
+        <h2>Adding an HTTP&#160;<span class="MyVariablesSource">Source</span></h2>
+        <p>When you set up an HTTP&#160;<span class="MyVariablesSource">Source</span>, a unique URL&#160;is assigned to that Source. When you upload a file using that URL, it's associated with the <span class="MyVariablesSource">Source</span>, and metadata is tagged to the file. </p>
+        <p><b>To configure an HTTP&#160;Source:</b>
+        </p>
+        <ol>
+            <li value="1">In the <span class="MyVariablesCompanyName">Sumo Logic</span> <![CDATA[ ]]><span class="MyVariablesWeb Application">Web Application</span> select <b>Manage &gt;&#160;Collectors</b>.<br></br><br></br><img src="Resources/Images/Manage_menu_Collectors_474x104.png" style="width: 474;height: 104;"></img><br></br><br></br></li>
+        </ol>
+        <ol>
+            <li value="2">In the <span class="MyVariablesCollector">Collector</span>s page, click <b>Add Source</b> next to a <b>Hosted </b><span style="font-weight: bold;" class="MyVariablesCollector">Collector</span>.<br /><br /><img src="Resources/Images/Hosted_Coll_add_Source_594x146.png" style="width: 594;height: 146;" /><br /></li>
+        </ol>
+        <ol>
+            <li value="3">Select                 <b>HTTP</b>. <br /><br /><img src="Resources/Images/HTTP_Source_Add_521x148.png" style="width: 521;height: 148;" /><br /><br /></li>
+        </ol>
+        <ol>
+            <li value="4">Enter a <b>Name</b> to display for this Source in the Sumo Logic Web Application. Description is optional. </li>
+        </ol>
+        <ol start="4">
+            <li value="5"> (Optional) For <b>Source Host </b>and<b> Source Category</b>, enter any string  to tag the output collected from this Source. (Category metadata is stored in a searchable   field called _sourceCategory.)</li>
+            <li value="6">Set any of the following under <b>Advanced</b>:</li>
+        </ol>
+        <p class="Indent"><b>Enable Timestamp Parsing.</b> This option is selected by default. If it's deselected, no timestamp information is parsed at all.</p>
+        <p class="Indent"><b>Time Zone.</b> There are two options for Time Zone. You can use the time zone present in your log files, and then choose an option in case  time zone information is missing from a log message. Or, you can have <span class="MyVariablesCompanyName">Sumo Logic</span> completely disregard any time zone information present in logs by forcing a time zone. It's very important to have the proper time zone set, no matter which option you choose. If  the time zone of logs can't be determined, <span class="MyVariablesCompanyName">Sumo Logic</span> assigns logs the Pacific Time zone (the time zone where logs are received); if the rest of your logs are from another time zone your search results will be affected.</p>
+        <p class="Indent"><b>Timestamp Format.</b> By default, <span class="MyVariablesCompanyName">Sumo Logic</span> will automatically detect the timestamp format of your logs. However, you can manually specify a timestamp format for a Source. See <a href="Understanding_Time_Stamps.htm">Specifying a Timestamp Format</a> for more information.</p>
+        <p class="Indent"><b>Multiline Processing. </b>Deselect <b>Multiline Processing</b> to avoid unnecessary processing if you are collecting single-message-per-line files (for example, Linux system.log). If you're working with multi-line messages   (for example, log4J or exception stack traces) then select this option. </p>
+        <p class="Indent"><b>Infer Boundaries.</b> Enable when you want Sumo Logic to automatically attempt to determine which lines belong to the same message. </p>
+        <p class="IndentNote">  If you deselect the Infer Boundaries option, you will need to enter a regular expression in the Boundary Regex field to use for detecting the start of multi-line messages.</p>
+        <p class="Indent"><b>Boundary Regex.</b> If you prefer to enter a regular expression to describe the start characteristic of individual multi-line messages, select this option.</p>
+        <p class="Indent"><b>Enable One Message Per Request.</b> Leave this choice deselected if you would like Select this option if you'll be sending a single message with each HTTP request.</p>
+        <ol>
+            <li value="7"><a href="Filtering_data_sent_from_a_Source.htm">Create any filters</a> you'd like for the new <span class="MyVariablesSource">Source</span>. </li>
+            <li value="8">When you are finished configuring the Source click <b>Save</b>. </li>
+            <li value="9">When the URL associated with the Source is displayed, copy the URL so you can use it to <a href="Uploading_Files_to_an_HTTP_Source.htm">send files</a>.<br /><br /><img src="Resources/Images/HTTP_URL_at_setup_286x131.png" style="width: 286;height: 131;" /><br /><br /></li>
+            <li value="10">Choose the method you'll use to <a href="Uploading_Files_to_an_HTTP_Source.htm">upload files to the Source</a>.<br /></li>
+        </ol>
+        <p class="Tip">If you need to access the Source's URL&#160;again, just click Show URL in the Collector tab of the Web Application:<br /><br /><br /><img src="Resources/Images/HTTP_Source_Show_URL_680x156.png" style="width: 680;height: 156;" /><br /><br /></p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Configuring_an_HTTP_Source.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

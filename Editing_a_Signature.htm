@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Operators &amp; Expressions|Summarize Operator">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Editing a Summarize Signature</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Editing_a_Signature.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Editing a Summarize Signature</h1>
+        <p>Editing a signature allows you to choose values that should be treated as wildcards. After you replace one or more values with a wildcard (*****) the summarize algorithm treats each value as the same, which expands the number of results.</p>
+        <p>For example, let's say that our search contains log messages with <b>sessionID</b> and <b>eventTime</b> values that we know will be different in each log message. In this situation, we don't want the summarize algorithm to be quite so specific, so we're going to edit the signatures highlighted below:</p>
+        <p>
+            <img src="Resources/Images/Summarize_example_step1_794x248.png" style="width: 794;height: 248;">
+            </img>
+        </p>
+        <p class="FigureTitle" style="font-size: 7pt;">Figure 1</p>
+        <p> When we re-run this report, we'll get the following results:</p>
+        <p>
+            <img src="Resources/Images/Summarize_example_results_792x205.png" style="width: 792;height: 205;">
+            </img>
+        </p>
+        <p class="FigureTitle" style="font-size: 7pt;">Figure 2</p>
+        <p class="FigureTitle" style="font-size: 7pt;">&#160;</p>
+        <p>Note that the previous line 7 (from Figure 1, above)&#160;was combined with the line above it, where the sessionID value was already being treated as a wildcard. This means that the line has jumped up to number 5 (in Figure 2), and that there are more results. If more specific results are needed, we could <a href="#Splittin">split</a> the signature to break them out once again.</p>
+        <p class="Important">When in doubt, replace fewer characters with a wildcard to avoid over-generalizing the signature.</p>
+        <p>
+            <br>
+            </br>
+        </p>
+        <p style="font-weight: bold;">To edit a signature:</p>
+        <ol>
+            <li value="1">Select text in the signature you'd like to edit. Then click <b>Replace selection with wildcard</b>.<br></br><br></br><img src="Resources/Images/Summarize_New_Edit.png"></img><br></br></li>
+            <li value="2">(Optional) If you're not happy with the results, while the line is still selected click <b>Clear selection</b>, or click the <b>Undo</b> icon.</li>
+        </ol>
+        <p style="font-weight: bold;">To make multiple edits to a single signature:</p>
+        <p>If there are two strings you'd like to replace with a wildcard, you can make the changes, then apply them at the same time. You'll have to click the Apply&#160;Changes button to save the wildcards.</p>
+        <ol>
+            <li value="1">Select some of the text you'd like to replace with a wildcard, and click<b> Replace selection with wildcard</b>. Then select the next portion of text you'd like to replace, and click <b>Replace selection with wildcard</b>.<br /><br /><img src="Resources/Images/Summarize_New_Edit_Multiple.png" /><br /><br /></li>
+            <li value="2">Click <b>Apply Changes</b>.<br /><br /><img src="Resources/Images/Summarize_apply_Sig_changes.png" /></li>
+        </ol>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Editing_a_Signature.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

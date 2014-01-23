@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Setting Up|Before you begin">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Testing connectivity</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Testing_Connectivity.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h2>Testing connectivity</h2>
+        <p>To ensure you have the required access and connectivity to the Sumo Logic service, there are a couple of checks you can do from the machine where you want to install a Collector.</p>
+        <p>To check connectivity, try one of these two options:</p>
+        <ul>
+            <li value="1">Open a browser to <a href="https://collectors.sumologic.com/" target="_blank">https://collectors.sumologic.com</a>. You should see the word "Tweep". <br /><img src="Resources/Images/tweep_365x160.png" alt="tweep result" style="width: 365;height: 160;" /></li>
+        </ul>
+        <ul>
+            <li value="1">   Try connecting  via telnet. Telnet to <b>collectors.sumologic.com 443</b>.<br />You should see a result similar to:</li>
+        </ul>
+        <p class="IndentCode">$telnet collectors.sumologic.com 443</p>
+        <p class="IndentCode">Trying collectors.sumologic.com...</p>
+        <p class="IndentCode">Connected to prod-events-lb-1056629993.us-east-1.elb.amazonaws.com.</p>
+        <p>If results show a failure to connect, check your firewall settings. </p>
+        <p> If Windows Firewall is enabled,  create an Inbound Rule to allow inbound Collector connections and then try again. To create a new inbound rule for your Windows firewall:</p>
+        <p class="Note">These are instructions  for a Windows 2008r2 system. If you are installing on another version of Windows, the steps should be similar, but are not likely to be exact.</p>
+        <ol>
+            <li value="1">	Go to <b>Administrative Tools &gt; Firewall Settings</b>.</li>
+            <li value="2">Click <b>New Rule</b>.</li>
+            <li value="3">Select <b>Port</b> for the type of rule, and then click <b>Next</b>.</li>
+            <li value="4">Enter <b>443</b> for the port, and then click <b>Next</b>.</li>
+            <li value="5">  Select <b>Allow</b> for the connection and then click <b>Next</b>.</li>
+            <li value="6">	  Select the appropriate Profile for your environment.  Leave all three options checked (recommended): Domain, Public, and Private, and then click <b>Next</b>.</li>
+            <li value="7">Enter a name and a description for your new rule, and then click <b>Finish</b>.</li>
+        </ol>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Testing_Connectivity.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

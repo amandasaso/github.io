@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Operators &amp; Expressions">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Join operator</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Join_operator.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Join operator</h1>
+        <p>The Join operator combines records two or more data streams. Results are admitted on-the-fly to allow real-time tables to be built. Values common to each table are then delivered as search results.</p>
+        <p>The join operator in Sumo Logic works much like a <a href="http://en.wikipedia.org/wiki/Join_(SQL)">standard SQL join</a>.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p>[search terms] | <b>join</b><br />(parse "starting stream from *" AS a) as t1,<br />(parse "starting search * from parent stream *" AS b, c) as t2,<br />(parse "starting save * from parent stream *" AS d, e) as t3<br />on t1.a = t2.c<br />and t1.a = t3.e</p>
+        <p>A <b>timewindow</b> can be added to a query to constrain the time period of when the elements the should arrive in order to have those values included in search results. The syntax for adding a timewindow is:</p>
+        <p>[search terms] | <b>join</b><br />(parse "starting stream from *" AS a) as t1,<br />(parse "starting search * from parent stream *" AS b, c) as t2,<br />(parse "starting save * from parent stream *" AS d, e) as t3<br />on t1.a = t2.c<br />and t1.a = t3.e<br />[timewindow 10m]</p>
+        <p style="font-weight: bold;">Rules:</p>
+        <ul>
+            <li value="1">Two or more tables must be created for a query.</li>
+            <li value="2">Data must be present in the timerange you choose for the query.</li>
+            <li value="3">Queries that include a join operator cannot be added to Dashboards.</li>
+            <li value="4">Only conjuctive conditions (AND) are allowed. Using NOT or OR conditions is not supported.</li>
+            <li value="5">The following conditions are not currently supported:<br />t1.a = 3<br />t1 a != t2.c<br />NOTt1.a<br />t1.a = t2.c OR t1.b = t2.d</li>
+        </ul>
+        <ul>
+            <li value="1">Subqueries are supported, and can include aggregate operators.</li>
+        </ul>
+        <p>&#160;</p>
+        <h3>Examples</h3>
+        <p style="font-weight: bold;">Running a join operator query</p>
+        <p>For this example we’ll run a join query on two tables using logs that look like:</p>
+        <p class="code">starting stream from stream-2454<br />starting stream from stream-7343<br />starting search search-733434 from parent stream stream-2454<br />starting search search-854343 from parent stream stream-7343<br />starting stream from stream-6543<br />starting search search-455563 from parent stream stream-6543<br />starting search search-32342 from parent stream stream-7343</p>
+        <p>Running a query like:</p>
+        <p><b>* | join</b>
+            <br style="font-weight: bold;" /><b>(parse "starting stream from *" AS a) AS T1,</b>
+            <br style="font-weight: bold;" /><b>(parse "starting search * from paraent stream *" AS b, c) AS T2</b>
+            <br style="font-weight: bold;" /><b>on T1.a = T2.c</b>
+        </p>
+        <p>returns results similar to:</p>
+        <table style="width: 611px;caption-side: top;">
+            <col style="width: 167px;" />
+            <col style="width: 170px;" />
+            <col style="width: 165px;" />
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">a</td>
+                    <td style="font-weight: bold;">b</td>
+                    <td style="font-weight: bold;">c</td>
+                </tr>
+                <tr>
+                    <td>
+stream-2454
+</td>
+                    <td>
+search-733434
+</td>
+                    <td>
+stream-2454
+</td>
+                </tr>
+                <tr>
+                    <td>stream-7343
+</td>
+                    <td>search-854343
+</td>
+                    <td>stream-7343</td>
+                </tr>
+                <tr>
+                    <td>stream-7343
+</td>
+                    <td>search-32342
+</td>
+                    <td>stream-7343</td>
+                </tr>
+                <tr>
+                    <td>stream-6543
+</td>
+                    <td>search-854343
+</td>
+                    <td>stream-6543</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <p style="font-weight: bold;">Using join with a diff operator</p>
+        <p>Let’s say our logs look something like:</p>
+        <p class="code">event=login session=12345 time=20130512<br />event=purchase session=12345 value=50<br />event=login session=23456 time=20130513<br />event=purchase session=12345 value=100<br />event=purchase session=23456 value=120<br />event=purchase session=23456 value=200<br />event=purchase session=23456 value=20</p>
+        <p>Running a query like:</p>
+        <p style="font-weight: bold;">* | <b>join</b><br />(parse "event=login session=* time=*" AS s1,time) as t1,<br />(parse "event=purchase session=* value=*" AS s2, v2) as t2<br />on t1.s1 = t2.s2</p>
+        <p>Produces results similar to:</p>
+        <table style="width: 611px;caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">s1</td>
+                    <td style="font-weight: bold;">time</td>
+                    <td style="font-weight: bold;">s2</td>
+                    <td style="font-weight: bold;">v2</td>
+                </tr>
+                <tr>
+                    <td>12345</td>
+                    <td>
+20130512
+</td>
+                    <td>12345</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>12345</td>
+                    <td>20130512</td>
+                    <td>12345</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>120</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>20</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Adding a diff operator, such as:</p>
+        <p><b>* | join</b>
+            <br style="font-weight: bold;" /><b>(parse "event=login session=* time=*" AS s1,time) as t1,</b>
+            <br style="font-weight: bold;" /><b>(parse "event=purchase session=* value=*" AS s2, v2) as t2</b>
+            <br style="font-weight: bold;" /><b>on t1.s1 = t2.s2</b>
+            <br style="font-weight: bold;" /><b>join terms | diff v2 by s2</b>
+        </p>
+        <p>Produces results similar to:</p>
+        <table style="width: 611px;caption-side: top;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;">s1</td>
+                    <td style="font-weight: bold;">time</td>
+                    <td style="font-weight: bold;">s2</td>
+                    <td style="font-weight: bold;">v2</td>
+                    <td style="font-weight: bold;">_diff</td>
+                </tr>
+                <tr>
+                    <td>12345</td>
+                    <td>
+20130512
+</td>
+                    <td>12345</td>
+                    <td>50</td>
+                    <td>null</td>
+                </tr>
+                <tr>
+                    <td>12345</td>
+                    <td>20130512</td>
+                    <td>12345</td>
+                    <td>100</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>120</td>
+                    <td>null</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>200</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>23456</td>
+                    <td>20130513</td>
+                    <td>23456</td>
+                    <td>20</td>
+                    <td>-180</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Join_operator.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

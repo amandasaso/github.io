@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Operators &amp; Expressions">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Sort or Top Operators</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Sort.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Sort or Top Operators</h1>
+        <p>The <b>sort</b> operator orders aggregated search results. Use <b>top</b> to reduce the number of sorted results returned. The default sort order is descending.</p>
+        <p>Syntax:</p>
+        <ul>
+            <li value="1">... | sort by fieldname //descending</li>
+            <li value="2">... | sort by +fieldname //ascending</li>
+            <li value="3">... | sort by fieldname asc //ascending</li>
+            <li value="4">... | top # fieldname by group_by_function</li>
+        </ul>
+        <p>Rules:</p>
+        <ul>
+            <li value="1">Default sort order is descending. </li>
+            <li value="2">To reverse the sort order to ascending, type a plus sign (+) before the field name you are sorting by. Alternatively, you can type                            <b>asc</b> after the field name.</li>
+            <li value="3">To numerically sort, first <a href="Casting_to_a_Number_Type.htm">cast the field to a number</a>. (Otherwise, the sort will be ordered as a text field.)</li>
+        </ul>
+        <p>Examples:</p>
+        <ul>
+            <li value="1">status AND down | extract "user=(?&lt;user&gt;.*?):" | count (*) group by user | sort by _count</li>
+            <li value="2">... | count user | top 2 user by _count
+</li>
+            <li value="3">... | count user | sort by _count asc</li>
+        </ul>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Sort.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>

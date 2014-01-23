@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" class="no-feedback" data-mc-search-type="Stem" data-mc-help-system-file-name="Default.xml" data-mc-path-to-help-system="" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-medium="non-print" data-mc-toc-path="Setting Up|Advanced Installed Collector Set Up">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Silent Installation for Linux, Mac, Unix, and Windows using the Tarball</title>
+        <link href="Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="Resources/Stylesheets/Styles.css" rel="stylesheet" />
+        <script src="Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop" style="display: none;"><a href="Default.htm#Unattended_Installation.htm">Open topic with navigation</a>
+        </p>
+        <script type="text/javascript">/* <![CDATA[ */
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16579649-1']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		/* ]]> */</script>
+        <h1>Silent Installation for Linux, Mac, Unix, and Windows using the Tarball</h1>
+        <p>Sumo Logic offers a generic tarball file that can be used to script unattended Collector installations for one or more Collectors. You'll need to download the tarball on each machine where you'll install a <span class="MyVariablesCollector">Collector</span> and make sure that JSON&#160;has been configured for the Sources you'll use to collect data on each machine.</p>
+        <p>In order to install the Collector, you'll need to make sure that you've created an appropriate user account on each computer, with admin permissions in addition to <span class="MyVariablesCompanyName">Sumo Logic</span> account credentials. These credentials are used during installation to <a href="#Step2">register the <span class="MyVariablesCollector">Collector</span></a>.</p>
+        <p>&#160;</p>
+        <h2>Step 1. Download the tarball </h2>
+        <p>The  tarball file  includes all the required files for installing and activating a Sumo Logic Collector <i>except</i> the Java Runtime Environment (JRE) Version 7. </p>
+        <p style="font-weight: bold;">To download the tarball:</p>
+        <p>Do one of the following:</p>
+        <ul>
+            <li value="1">Download tar.gz from the <span class="MyVariablesCompanyName">Sumo Logic</span> <![CDATA[ ]]><span class="MyVariablesWeb Application">Web Application</span> (Download Collector &gt;&#160;Generic Unix).</li>
+            <li value="2">If you're using an installation script, use wget or curl to download the file from: <a href="https://collectors.sumologic.com/rest/download/tar">https://collectors.sumologic.com/rest/download/tar.</a></li>
+        </ul>
+        <p class="IndentTip">If you're installing on an AMI, create an image that includes the tarball. </p>
+        <p style="font-weight: bold;">Preparing the tarball:</p>
+        <ol>
+            <li value="1">(Windows and Linux only) Do one of the following to create the /sumocollector directory:</li>
+        </ol>
+        <ul>
+            <li value="1"><b>Linux/Mac/Unix:</b>  tar -xvf tar</li>
+            <li value="2"><b>Windows:</b> Use 7-zip or Winzip to extract the tar file</li>
+        </ul>
+        <ol>
+            <li value="2">Move <b>/sumocollector/tanuki/{OS Type}/wrapper</b> to <b>/sumocollector/wrapper</b>. (For Windows, the file name is wrapper.exe.)</li>
+        </ol>
+        <p class="IndentTip">If the wrapper isn't in the correct directory, the "Unable to locate any of the following binaries" message displays.</p>
+        <ol>
+            <li value="4">Move the other file to {version}/bin/native/lib.</li>
+            <li value="5">(Mac and Linux only) Run the following to allow the wrapper and collector executables to run:</li>
+        </ol>
+        <p class="Indent" style="font-weight: bold;">chmod ug+x wrapper</p>
+        <p class="Indent" style="font-weight: bold;">chmod ug+x collector</p>
+        <p>&#160;</p>
+        <h2>Step 2. Configure Sources</h2>
+        <p>The Collector Management API allows you to pass all Source settings in a JSON&#160;file, including naming a Source, adding metadata tags, and pointing the Source to the files you want to collect. For instructions, see <a href="Using_JSON_to_configure_Sources.htm">Using JSON to configure Sources.</a></p>
+        <p>Optionally, you can configure <span class="MyVariablesSource">Source</span>s using the <span class="MyVariablesCompanyName">Sumo Logic</span> Web&#160;Application after the Collector has been installed.</p>
+        <p>&#160;</p>
+        <h2><a name="Step"></a>Step 3. Modify wrapper.conf</h2>
+        <p> Now you'll modify the wrapper.conf file to point to the location where the JRE exists on the computer where you'll install the <span class="MyVariablesCollector">Collector</span>.</p>
+        <p><b>To modify wrapper.conf:</b>
+        </p>
+        <ol>
+            <li value="1">In the installation directory, find the wrapper.conf file here: <b>[installation dir]/config/</b><b>wrapper.conf.</b></li>
+            <li value="2">Open the <b>wrapper.conf</b> file and locate the wrapper.java.command line that looks like this:<br /><br /><img src="Resources/Images/Silent_install_wrappe_conf_java_430x95.jpg" style="width: 430;height: 95;" /><br /><br /></li>
+            <li value="3">Modify this line  to point to the Java command location for the target operating system. For example:<br /><br /><img src="Resources/Images/Silent_install_wrapper_java_examples_430x198.jpg" style="width: 430;height: 198;" /></li>
+        </ol>
+        <p>&#160;</p>
+        <h2>Step 4. Create sumo.conf </h2>
+        <p>The <b><a href="Using_sumo.conf.htm"><b>sumo.conf</b></a></b> file allows you to pass <span class="MyVariablesCollector">Collector</span> configuration parameters to <span class="MyVariablesCompanyName">Sumo Logic</span> during installation. Once installation is complete, sumo.conf isn't needed (compared to wrapper.conf, which cannot be deleted).</p>
+        <p data-mc-conditions="">There are two ways you can pass credentials that will be used to authenticate Collectors. You can either include email and password parameters, or you can include accessid and accesskey parameters to use a <a href="Generating_Collector_Installation_API_Keys.htm">Access ID&#160;and Access Key credentials</a> that are generated through the <span class="MyVariablesCompanyName">Sumo Logic</span> <![CDATA[ ]]><span class="MyVariablesWeb Application">Web Application</span>. </p>
+        <p data-mc-conditions=""><b>Only one set of credentials are needed (either email/password or accessid/accesskey). </b>
+        </p>
+        <p data-mc-conditions="">Required parameters in sumo.conf are:</p>
+        <ul>
+            <li value="1" data-mc-conditions=""><b>name. </b>Name of the Collector. If left blank, the host name will be used. </li>
+            <li value="2" data-mc-conditions=""><b>sources.</b> Path to JSON file that contains Source configuration. (See <a href="Using_JSON_to_configure_Sources.htm">Using JSON to configure Sources</a>.)</li>
+            <li value="3" data-mc-conditions=""><b>accessid. </b>Access ID credential used to register the Collector.</li>
+            <li value="4" data-mc-conditions=""><b>accesskey.</b> Access Key credential.</li>
+            <li value="5" data-mc-conditions=""><b>email.</b> Email address used to register the Collector.</li>
+            <li value="6" data-mc-conditions=""><b>password.</b> Password used to register the <span class="MyVariablesCollector">Collector</span>.</li>
+        </ul>
+        <p class="Indent" data-mc-conditions="">Remember, if you use accessid and accesskey, you should not include email and password. Conversely, if you use email and password, do not include accessid and accesskey.</p>
+        <p style="font-weight: bold;">To create sumo.conf:</p>
+        <ol>
+            <li value="1">Using a text editor (or any similar program) create a new file.</li>
+            <li value="2">Add all of the required parameters (for more information see <a href="Using_sumo.conf.htm#sumo.con">sumo.conf Parameters).</a></li>
+            <li value="3">Save the file to <b><b>/etc/sumo.conf</b>.</b></li>
+        </ol>
+        <p>
+            <br />
+        </p>
+        <h2><a name="Step2"></a>Step 5. Run the Collector </h2>
+        <p>The <span class="MyVariablesCollector">Collector</span> is activated the first time you execute it.</p>
+        <p style="font-weight: bold;">To execute the Collector:</p>
+        <p style="font-weight: bold;"><span style="font-weight: normal;">Depending on the OS, do one of the following:</span>
+        </p>
+        <p><b>Linux, Solaris, Unix, and MacOS.</b> Control the starting and stopping of the service by using:</p>
+        <ul>
+            <li value="1"><b>sudo ./collector start</b>
+            </li>
+            <li value="2"><b>sudo ./collector stop</b>
+            </li>
+            <li value="3"><b>sudo ./collector status</b>
+            </li>
+            <li value="4"><b>sudo ./collector restart</b>
+            </li>
+        </ul>
+        <p><b>Windows.</b> Register and start the service by running <b>InstallCollector-NT.bat</b> to register the Collector as a service on the Windows system, then run <b>startCollectorService.bat</b> to start the <span class="MyVariablesCollector">Collector</span>.</p>
+        <p>&#160;</p>
+        <p>&#160;</p>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkBottom" style="display: none;"><a href="Default.htm#Unattended_Installation.htm">Open topic with navigation</a>
+        </p>
+    </body>
+</html>
